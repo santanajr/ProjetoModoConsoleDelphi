@@ -1,0 +1,104 @@
+﻿program PConsole;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  System.Generics.Collections,
+  USisDos.Tela.Menu in 'USisDos.Tela.Menu.pas',
+  USisDos.Tela.IMenu in 'USisDos.Tela.IMenu.pas',
+  USisDos.Tela.CadastroProduto in 'USisDos.Tela.CadastroProduto.pas',
+  USisDos.Model.Produto in 'USisDos.Model.Produto.pas',
+  USisDos.Tela.ICadastroProduto in 'USisDos.Tela.ICadastroProduto.pas',
+  USisDos.Model.Estoque in 'USisDos.Model.Estoque.pas',
+  USisDos.Tela.ICadastroEstoque in 'USisDos.Tela.ICadastroEstoque.pas',
+  USisDos.Tela.CadastroEstoque in 'USisDos.Tela.CadastroEstoque.pas';
+
+var
+  LOpcaoEscolhida   : string;
+  LTelaProduto      : ICadastroProduto;
+  LTelaEstoque      : ICadastroEstoque;
+
+  LListaProduto     : TList<TProduto>;
+  LListaEstoque     : TList<TEstoque>;
+
+  LRespostaCadastro : string;
+
+  procedure CriarTelas;
+  begin
+     LTelaProduto  := TTelaCadastroProduto.New;
+     LTelaEstoque  := TCadastroEstoque.New;
+  end;
+
+  procedure CriarListaDados;
+  begin
+     LListaProduto := TList<TProduto>.Create();
+     LListaEstoque := TList<TEstoque>.Create();
+  end;
+
+  procedure RespostaCadastroNegativa;
+  begin
+    LRespostaCadastro := 'N';
+  end;
+
+  procedure RespostaCadastroPositiva;
+  begin
+    LRespostaCadastro := 'S';
+  end;
+
+  function ValidarResposaCadastro(AValorResposta : string) : Boolean;
+  begin
+    result := AValorResposta.ToUpper() = LRespostaCadastro.ToUpper;
+  end;
+
+  function TelaCadastroProduto : string;
+  begin
+    LTelaProduto.MontarTelaCadastroProduto;
+    LListaProduto.Add(LTelaProduto.GetProduto);
+    Result := LTelaProduto.GetOpcaoEscolhida;
+  end;
+
+  function TelaCadastroEstoque : string;
+  begin
+    LTelaEstoque.MontarTelaCadastroEstoque;
+    LTelaEstoque.SetListaProduto(LListaProduto)
+                .SetListaEstoque(LListaEstoque)
+                .PesquisarProduto(TListProd)
+                .GuardarEstoque.MensagemAtualizacaoEstoque;
+    Result := LTelaEstoque.GetOpcaoEscolhida;
+  end;
+begin
+  try
+    { TODO -oUser -cConsole Main : Insert code here }
+     CriarTelas;
+     CriarListaDados;
+     RespostaCadastroNegativa;
+
+     while ValidarResposaCadastro('N') do
+     begin
+       LOpcaoEscolhida := TMenuTelaDos.New
+                                      .MontarMenu
+                                      .EscolherOpcao
+                                      .GetOpcaoEscolhida;
+       RespostaCadastroPositiva;
+
+       case LOpcaoEscolhida[1] of
+          '1' :  begin
+                   while ValidarResposaCadastro('S') do
+                     LRespostaCadastro := TelaCadastroProduto;
+                 end;
+
+           '2' : begin
+                  while ValidarResposaCadastro('S') do
+                    LRespostaCadastro := TelaCadastroEstoque;
+                 end;
+       end;
+     end;
+     ReadLn;
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+end.

@@ -1,0 +1,14 @@
+unit USisDos.Tela.IMenu;
+
+interface
+
+type
+  IMenu = Interface['{D1629BB9-F447-4541-A183-CFB89C3597DB}']
+    procedure MontarMenu;
+    procedure EscolherOpcao;
+    procedure MensagemOpcaoIncorreta;
+  End;
+
+implementation
+
+end.

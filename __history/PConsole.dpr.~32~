@@ -1,0 +1,78 @@
+﻿program PConsole;
+
+{$APPTYPE CONSOLE}
+
+{$R *.res}
+
+uses
+  System.SysUtils,
+  System.Generics.Collections,
+  USisDos.Tela.Menu in 'USisDos.Tela.Menu.pas',
+  USisDos.Tela.IMenu in 'USisDos.Tela.IMenu.pas',
+  USisDos.Tela.CadastroProduto in 'USisDos.Tela.CadastroProduto.pas',
+  USisDos.Model.Produto in 'USisDos.Model.Produto.pas',
+  USisDos.Tela.ICadastroProduto in 'USisDos.Tela.ICadastroProduto.pas',
+  USisDos.Model.Estoque in 'USisDos.Model.Estoque.pas',
+  USisDos.Tela.ICadastroEstoque in 'USisDos.Tela.ICadastroEstoque.pas',
+  USisDos.Tela.CadastroEstoque in 'USisDos.Tela.CadastroEstoque.pas';
+
+var
+  LOpcaoEscolhida   : string;
+  LTelaProduto      : ICadastroProduto;
+  LTelaEstoque      : ICadastroEstoque;
+
+  LListaProduto     : TList<TProduto>;
+  LListaEstoque     : TList<TEstoque>;
+
+  LRespostaCadastro : string;
+
+begin
+  try
+    { TODO -oUser -cConsole Main : Insert code here }
+     LTelaProduto  := TTelaCadastroProduto.New;
+     LTelaEstoque  := TCadastroEstoque.New;
+
+     LListaProduto := TList<TProduto>.Create();
+     LListaEstoque := TList<TEstoque>.Create();
+
+     LRespostaCadastro := 'N';
+     while LRespostaCadastro.ToUpper = 'N' do
+     begin
+       LOpcaoEscolhida := TMenuTelaDos.New
+                                      .MontarMenu
+                                      .EscolherOpcao
+                                      .GetOpcaoEscolhida;
+       LRespostaCadastro := 'S';
+
+       case LOpcaoEscolhida[1] of
+          '1' :  begin
+                   LTelaProduto.MontarTelaCadastroProduto;
+                   LListaProduto.Add(LTelaProduto.GetProduto);
+                   LRespostaCadastro := LTelaProduto.GetOpcaoEscolhida;
+                   While LRespostaCadastro = 'S' do
+                   begin
+                     LTelaProduto.MontarTelaCadastroProduto;
+                     LListaProduto.Add(LTelaProduto.GetProduto);
+                     LRespostaCadastro := LTelaProduto.GetOpcaoEscolhida;
+                   end;
+                end;
+
+           '2': begin
+                  while LRespostaCadastro = 'S' do
+                  begin
+                    LTelaEstoque.MontarTelaCadastroEstoque;
+                    LTelaEstoque.SetListaProduto(LListaProduto)
+                                .SetListaEstoque(LListaEstoque)
+                                .PesquisarProduto(TListProd)
+                                .GuardarEstoque.MensagemAtualizacaoEstoque;
+                    LRespostaCadastro := LTelaEstoque.GetOpcaoEscolhida;
+                  end;
+                end;
+       end;
+     end;
+     ReadLn;
+  except
+    on E: Exception do
+      Writeln(E.ClassName, ': ', E.Message);
+  end;
+end.

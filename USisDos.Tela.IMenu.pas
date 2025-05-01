@@ -1,0 +1,15 @@
+unit USisDos.Tela.IMenu;
+
+interface
+
+type
+  IMenu = Interface['{D1629BB9-F447-4541-A183-CFB89C3597DB}']
+    function  MontarMenu : IMenu;
+    function  EscolherOpcao : IMenu;
+    procedure MensagemOpcaoIncorreta;
+    function  GetOpcaoEscolhida : string;
+  End;
+
+implementation
+
+end.

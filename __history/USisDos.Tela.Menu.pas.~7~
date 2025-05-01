@@ -1,0 +1,68 @@
+unit USisDos.Tela.Menu;
+
+interface
+uses
+  System.SysUtils, USisDos.Tela.IMenu;
+
+Type
+  TMenuTelaDos = class(TInterfacedObject, IMenu)
+    private
+      FOpcaoEscolhida : string;
+
+      function ValidarOpcaoEscolhida : Boolean;
+    public
+      function  MontarMenu    : IMenu;
+      function  EscolherOpcao : IMenu;
+      procedure MensagemOpcaoIncorreta;
+
+      class function New : IMenu;
+  end;
+
+
+implementation
+
+{ TMenuTelaDos }
+
+function TMenuTelaDos.EscolherOpcao: IMenu;
+begin
+  ReadLn(FOpcaoEscolhida);
+  While not (ValidarOpcaoEscolhida) do
+  begin
+    MensagemOpcaoIncorreta;
+    ReadLn(FOpcaoEscolhida);
+  end;
+
+  Result := Self;
+end;
+
+procedure TMenuTelaDos.MensagemOpcaoIncorreta;
+begin
+  WriteLn('Opção Incorreta... Tente Novamente.');
+end;
+
+function TMenuTelaDos.MontarMenu : IMenu;
+begin
+  WriteLn('Sistema DOS - Menu Escolha');
+
+  WriteLn('1.Cadastro Produto');
+  WriteLn('2.Cadastro Estoque');
+  WriteLn('3.Registro Venda');
+  WriteLn('4.Sair');
+  WriteLn('');
+  WriteLn('');
+  WriteLn('Escolha a opção desejada ?');
+
+  Result := Self;
+end;
+
+class function TMenuTelaDos.New: IMenu;
+begin
+  Result := TMenuTelaDos.Create;
+end;
+
+function TMenuTelaDos.ValidarOpcaoEscolhida: Boolean;
+begin
+  result := (FOpcaoEscolhida.Length = 1) and CharInset( FOpcaoEscolhida[1], ['1','2','3','4']);
+end;
+
+end.

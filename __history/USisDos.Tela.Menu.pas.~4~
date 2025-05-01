@@ -1,0 +1,58 @@
+unit USisDos.Tela.Menu;
+
+interface
+uses
+  System.SysUtils, USisDos.Tela.IMenu;
+
+Type
+  TMenuTelaDos = class(TInterfacedObject, IMenu)
+    private
+      FOpcaoEscolhida : string;
+
+      function ValidarOpcaoEscolhida : Boolean;
+    public
+      procedure MontarMenu;
+      procedure EscolherOpcao;
+      procedure MensagemOpcaoIncorreta;
+  end;
+
+
+implementation
+
+{ TMenuTelaDos }
+
+procedure TMenuTelaDos.EscolherOpcao;
+begin
+  ReadLn(FOpcaoEscolhida);
+  While not (ValidarOpcaoEscolhida) do
+  begin
+    MensagemOpcaoIncorreta;
+    ReadLn(FOpcaoEscolhida);
+  end;
+end;
+
+procedure TMenuTelaDos.MensagemOpcaoIncorreta;
+begin
+  WriteLn('Opção Incorreta... Tente Novamente.');
+end;
+
+procedure TMenuTelaDos.MontarMenu;
+begin
+  WriteLn('Sistema DOS - Menu Escolha');
+
+  WriteLn('1.Cadastro Produto');
+  WriteLn('2.Cadastro Estoque');
+  WriteLn('3.Registro Venda');
+  WriteLn('4.Sair');
+  WriteLn('');
+  WriteLn('');
+  WriteLn('Escolha a opção desejada ?');
+
+end;
+
+function TMenuTelaDos.ValidarOpcaoEscolhida: Boolean;
+begin
+  result := ((FOpcaoEscolhida.Length = 1) and (FOpcaoEscolhida[1] in ['1','2','3','4']))
+end;
+
+end.

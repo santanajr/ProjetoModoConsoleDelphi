@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8E549D51-C94A-494E-9E3D-051521B414DE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PConsole.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PtesteConsole.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PConsole">
+        <MSBuild Projects="PConsole.dproj"/>
+    </Target>
+    <Target Name="PConsole:Clean">
+        <MSBuild Projects="PConsole.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PConsole:Make">
+        <MSBuild Projects="PConsole.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PtesteConsole">
+        <MSBuild Projects="PtesteConsole.dproj"/>
+    </Target>
+    <Target Name="PtesteConsole:Clean">
+        <MSBuild Projects="PtesteConsole.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PtesteConsole:Make">
+        <MSBuild Projects="PtesteConsole.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PConsole;PtesteConsole"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PConsole:Clean;PtesteConsole:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PConsole:Make;PtesteConsole:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

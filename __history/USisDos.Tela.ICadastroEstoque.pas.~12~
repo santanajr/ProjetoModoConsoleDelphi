@@ -1,0 +1,25 @@
+unit USisDos.Tela.ICadastroEstoque;
+
+interface
+
+uses System.SysUtils,
+      System.Generics.Collections,
+      USisDos.Model.Produto,
+      USisDos.Model.Estoque;
+
+type
+
+  TListaPesquisa = (TListProd, TListEstoque);
+
+  ICadastroEstoque = interface ['{D60E547B-95BB-471C-9617-1CCC61D32F4F}']
+    function MontarTelaCadastroEstoque : ICadastroEstoque;
+    function SetListaProduto(AListProduto :TList<TProduto>): ICadastroEstoque;
+    function SetListaEstoque(AListaEstoque: TList<TEstoque>): ICadastroEstoque;
+    function PesquisarProduto(ATipoLista : TListaPesquisa = TListProd): ICadastroEstoque;
+    function SetValorEstoque(AEstoque : Integer): ICadastroEstoque;
+    function GuardarEstoque : ICadastroEstoque;
+  end;
+
+implementation
+
+end.

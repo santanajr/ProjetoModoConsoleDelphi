@@ -1,0 +1,173 @@
+unit USisDos.Tela.CadastroEstoque;
+
+interface
+
+uses System.SysUtils,
+     System.Generics.Collections,
+     USisDos.Tela.ICadastroEstoque,
+     USisDos.Model.Produto,
+     USisDos.Model.Estoque;
+
+type
+
+  TCadastroEstoque = class(TInterfacedObject, ICadastroEstoque)
+    FListaProduto : TList<TProduto>;
+    FListaEstoque : TList<TEstoque>;
+    FEstoque      : TEstoque;
+    FProduto      : TProduto;
+
+    FCodigoDigitado : string;
+    FQtdDigitada    : Integer;
+    FOpcaoEscolhida : string;
+    FProdutoEncontrado : Boolean;
+
+    constructor Create;
+
+    function MontarTelaCadastroEstoque : ICadastroEstoque;
+    function MensagemAtualizacaoEstoque : ICadastroEstoque;
+
+    function SetListaProduto(AListProduto :TList<TProduto>): ICadastroEstoque;
+    function SetListaEstoque(AListaEstoque: TList<TEstoque>) : ICadastroEstoque;
+    function PesquisarProduto(ATipoLista : TListaPesquisa = TListProd) : ICadastroEstoque;
+    function SetValorEstoque(AEstoque : Integer) : ICadastroEstoque;
+    function GuardarEstoque : ICadastroEstoque;
+
+    function GetOpcaoEscolhida : string;
+    procedure SetProdutoEncontradoNegativo;
+
+    class function New : ICadastroEstoque;
+  end;
+
+implementation
+
+{ TCadastroEstoque }
+
+constructor TCadastroEstoque.Create;
+begin
+  FEstoque := TEstoque.Create;
+end;
+
+function TCadastroEstoque.SetListaEstoque(AListaEstoque: TList<TEstoque>): ICadastroEstoque;
+begin
+  FListaEstoque := AListaEstoque;
+  Result := Self;
+end;
+
+function TCadastroEstoque.GetOpcaoEscolhida: string;
+begin
+  Result := FOpcaoEscolhida.ToUpper();
+end;
+
+function TCadastroEstoque.GuardarEstoque: ICadastroEstoque;
+begin
+  PesquisarProduto(TListProd);
+  if (FEstoque <> nil) and (FProdutoEncontrado) then
+  begin
+    SetValorEstoque(FQtdDigitada);
+    FListaEstoque.Add(FEstoque);
+  end;
+  Result := Self;
+end;
+
+function TCadastroEstoque.MensagemAtualizacaoEstoque: ICadastroEstoque;
+var
+  LMsg : string;
+begin
+  LMsg := 'O produto não foi encontrado';
+  if FProdutoEncontrado then
+    LMsg := 'O produto ' + FEstoque.FProduto.FCodigo + ' tem estoque atual de ' + FEstoque.Estoque.ToString();
+  WriteLn(LMsg);
+  Result := Self;
+end;
+
+function TCadastroEstoque.MontarTelaCadastroEstoque: ICadastroEstoque;
+begin
+  Writeln('Pesquise o codigo do produto');
+  ReadLn(FCodigoDigitado);
+  Writeln('Digite a quantidade em estoque');
+  ReadLn(FQtdDigitada);
+  Writeln('Deseja continuar ? (S/N)');
+  ReadLn(FOpcaoEscolhida);
+  Result := Self;
+end;
+
+class function TCadastroEstoque.New: ICadastroEstoque;
+begin
+  result := TCadastroEstoque.Create;
+end;
+
+function TCadastroEstoque.PesquisarProduto(ATipoLista : TListaPesquisa = TListProd): ICadastroEstoque;
+
+  function EncontrarProdutoPorCodigo(const ACodigo: string): TProduto;
+  var
+    Produto: TProduto;
+  begin
+    for Produto in FListaProduto do
+      if Produto.FCodigo = ACodigo then
+        Exit(Produto);
+    Result := nil;
+  end;
+
+  procedure PesquisaListaProduto;
+  var
+    LProduto: TProduto;
+  begin
+    FProdutoEncontrado := False;
+    LProduto := EncontrarProdutoPorCodigo(FCodigoDigitado);
+
+    if Assigned(LProduto) then
+    begin
+      FEstoque.FProduto := LProduto;
+      FProdutoEncontrado := True;
+    end;
+  end;
+
+ function EncontrarProdutoEmEstoque(const ACodigo: string): TProduto;
+ var
+  Estoque: TEstoque;
+ begin
+   for Estoque in FListaEstoque do
+     if Estoque.FProduto.FCodigo = ACodigo then
+       Exit(Estoque.FProduto);
+   Result := nil;
+ end;
+
+ procedure PesquisaListaEstoque;
+ var
+  LProduto: TProduto;
+ begin
+   FProdutoEncontrado := False;
+   LProduto := EncontrarProdutoEmEstoque(FCodigoDigitado);
+
+   if Assigned(LProduto) then
+   begin
+     FEstoque.FProduto := LProduto;
+     FProdutoEncontrado := True;
+   end;
+ end;
+
+begin
+  Result := Self;
+  case ATipoLista of
+    TListProd    : PesquisaListaProduto;
+    TListEstoque : PesquisaListaEstoque;
+  end;
+end;
+
+function TCadastroEstoque.SetListaProduto(AListProduto: TList<TProduto>): ICadastroEstoque;
+begin
+  FListaProduto := AListProduto;
+  Result := Self;
+end;
+
+procedure TCadastroEstoque.SetProdutoEncontradoNegativo;
+begin
+  FProdutoEncontrado := False;
+end;
+
+function TCadastroEstoque.SetValorEstoque(AEstoque : Integer): ICadastroEstoque;
+begin
+  FEstoque.Estoque := FEstoque.Estoque + AEstoque;
+end;
+
+end.
