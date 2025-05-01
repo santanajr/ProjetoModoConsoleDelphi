@@ -14,6 +14,8 @@ Características básicas de algumas boas práticas do  Clean Code (Código Limp
 
 Trecho do código do projeto :
 
+![Captura de tela 2025-05-01 015015](https://github.com/user-attachments/assets/cd22a98a-a3f9-4c34-b27d-8de42823f16c)
+
 
 O projeto tamém apresenta o uso : 
 - Uso de Interface
@@ -47,20 +49,21 @@ Organização e clareza: facilita entender o fluxo e configuração de objetos c
 
 Segue Exemplo Fluent Code : 
 
+![Captura de tela 2025-05-01 014755](https://github.com/user-attachments/assets/763c1a42-e27f-4a30-a022-01e8518358f4)
+
+![Captura de tela 2025-05-01 014858](https://github.com/user-attachments/assets/731a9839-3cb5-4e62-89d5-6220e50a5a36)
 
 
   
 Projeto Console
 
+![Captura de tela 2025-05-01 011928](https://github.com/user-attachments/assets/0f5f1552-88c8-43b8-b1d5-4e88b46391a6)
 
 
 Projeto de Teste Unitário
 
-  
-
-
-
-
+ ![Captura de tela 2025-05-01 013035](https://github.com/user-attachments/assets/6ac87294-e834-4156-be84-355f6ee3b0ed)
+ 
 
 
 Explicação sobre as telas :
