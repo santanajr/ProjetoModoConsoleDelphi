@@ -74,7 +74,6 @@ Execução teste unitário
 
 Explicação sobre as telas :
 
- 
 
 O usuário escolhe as opções para tal temos 3 Telas :
 - Menu Principal
