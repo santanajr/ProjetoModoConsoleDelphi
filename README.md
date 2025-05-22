@@ -84,22 +84,9 @@ O usuário escolhe as opções para tal temos 3 Telas :
 
 Em nossos fontes :
 
-2 projetos
-PConsole - Projeto de Cadastro
-PtesteConsole - Projeto Teste Unitário do projeto 
-  
-Modelos
-Produto        - USisDos.Model.Produto
-Estoque        - USisDos.Model.Estoque
+![image](https://github.com/user-attachments/assets/59c2c259-8378-4a39-887c-5761dc42d831)
 
-Inferfaces
-Produto        - USisDos.Tela.ICadastroProduto
-Estoque        - USisDos.Tela.ICadastroEstoque
-Menu Principal - USisDos.Tela.IMenu
   
-Telas
-Produto        - USisDos.Tela.CadastroProduto
-Estoque        - USisDos.Tela.CadastroEstoque
-Menu Principal - USisDos.Tela.Menu
+
   
 
