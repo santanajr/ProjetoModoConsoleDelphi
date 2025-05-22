@@ -18,5 +18,14 @@
     <Transaction>2025/04/24 15:37:10.000.466,C:\Delphi\ProjetoConsole\Unit1.pas=C:\Delphi\ProjetoConsole\USisDos.Tela.ICadastroEstoque.pas</Transaction>
     <Transaction>2025/04/24 16:00:53.000.785,=C:\Delphi\ProjetoConsole\Unit1.pas</Transaction>
     <Transaction>2025/04/24 16:06:21.000.623,C:\Delphi\ProjetoConsole\Unit1.pas=C:\Delphi\ProjetoConsole\USisDos.Tela.CadastroEstoque.pas</Transaction>
+    <Transaction>2025/05/22 00:10:03.171,=C:\Delphi\ProjetoConsole\Unit1.pas</Transaction>
+    <Transaction>2025/05/22 00:11:05.437,C:\Delphi\ProjetoConsole\USisDos.Tela.CriarTela.pas=C:\Delphi\ProjetoConsole\Unit1.pas</Transaction>
+    <Transaction>2025/05/22 00:18:34.193,=C:\Delphi\ProjetoConsole\USisDos.Tela.ICriarTela.pas</Transaction>
+    <Transaction>2025/05/22 00:18:49.562,=C:\Delphi\ProjetoConsole\Unit1.pas</Transaction>
+    <Transaction>2025/05/22 00:19:22.036,C:\Delphi\ProjetoConsole\USisDos.Tela.CriarTela.pas=C:\Delphi\ProjetoConsole\Unit1.pas</Transaction>
+    <Transaction>2025/05/22 00:46:29.301,C:\Delphi\ProjetoConsole\USisDos.Tela.ICriarTela.pas=</Transaction>
+    <Transaction>2025/05/22 00:47:02.492,=C:\Delphi\ProjetoConsole\USisDos.Tela.ICriarTelaProduto.pas</Transaction>
+    <Transaction>2025/05/22 00:48:56.615,C:\Delphi\ProjetoConsole\USisDos.Tela.CriarTela.pas=</Transaction>
+    <Transaction>2025/05/22 00:53:15.413,=C:\Delphi\ProjetoConsole\USisDos.Tela.CriarTelaProduto.pas</Transaction>
   </Transactions>
 </BorlandProject>

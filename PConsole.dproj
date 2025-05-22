@@ -186,6 +186,8 @@
         <DCCReference Include="USisDos.Model.Estoque.pas"/>
         <DCCReference Include="USisDos.Tela.ICadastroEstoque.pas"/>
         <DCCReference Include="USisDos.Tela.CadastroEstoque.pas"/>
+        <DCCReference Include="USisDos.Tela.ICriarTelaProduto.pas"/>
+        <DCCReference Include="USisDos.Tela.CriarTelaProduto.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

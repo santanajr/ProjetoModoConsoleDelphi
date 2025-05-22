@@ -14,11 +14,13 @@ uses
   USisDos.Tela.ICadastroProduto in 'USisDos.Tela.ICadastroProduto.pas',
   USisDos.Model.Estoque in 'USisDos.Model.Estoque.pas',
   USisDos.Tela.ICadastroEstoque in 'USisDos.Tela.ICadastroEstoque.pas',
-  USisDos.Tela.CadastroEstoque in 'USisDos.Tela.CadastroEstoque.pas';
+  USisDos.Tela.CadastroEstoque in 'USisDos.Tela.CadastroEstoque.pas',
+  USisDos.Tela.ICriarTelaProduto in 'USisDos.Tela.ICriarTelaProduto.pas',
+  USisDos.Tela.CriarTelaProduto in 'USisDos.Tela.CriarTelaProduto.pas';
 
 var
   LOpcaoEscolhida   : string;
-  LTelaProduto      : ICadastroProduto;
+  LTelaProduto      : ICriarTelaProduto;
   LTelaEstoque      : ICadastroEstoque;
 
   LListaProduto     : TList<TProduto>;
@@ -28,7 +30,7 @@ var
 
   procedure CriarTelas;
   begin
-     LTelaProduto  := TTelaCadastroProduto.New;
+     LTelaProduto  := TTelaCriarTelaProduto.New;
      LTelaEstoque  := TCadastroEstoque.New;
   end;
 
@@ -60,7 +62,7 @@ var
 
   function TelaCadastroProduto : string;
   begin
-    LTelaProduto.MontarTelaCadastroProduto;
+    LTelaProduto.CriarTelaCadastroProduto;
     LListaProduto.Add(LTelaProduto.GetProduto);
     Result := LTelaProduto.GetOpcaoEscolhida;
   end;
@@ -78,9 +80,9 @@ var
   procedure SelecionarOpcaoMenu;
   begin
     LOpcaoEscolhida := TMenuTelaDos.New
-                                      .MontarMenu
-                                      .EscolherOpcao
-                                      .GetOpcaoEscolhida;
+                                   .MontarMenu
+                                   .EscolherOpcao
+                                   .GetOpcaoEscolhida;
   end;
 
   procedure MensagemOpcao3;
@@ -124,7 +126,6 @@ var
 
 begin
   try
-    { TODO -oUser -cConsole Main : Insert code here }
      CriarTelas;
      CriarListaDados;
      RespostaCadastroNegativa;

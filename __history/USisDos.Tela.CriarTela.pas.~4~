@@ -1,0 +1,39 @@
+unit USisDos.Tela.CriarTela;
+
+interface
+
+uses
+  USisDos.Tela.ICriarTela;
+
+type
+  TTelaCriarTela = class(TInterfacedObject, ICriarTela)
+  public
+    function  CriarTelaCadastroProduto : ICriarTela;
+    function  CriarTelaCadastroEstoque : ICriarTela;
+    function  CriarTelaMenu : ICriarTela;
+  end;
+
+
+implementation
+
+{ TTelaCriarTela }
+
+function TTelaCriarTela.CriarTelaCadastroEstoque: ICriarTela;
+var
+  LCodigo, LDescricao : string;
+  LPreco : double;
+begin
+  result := Self;
+end;
+
+function TTelaCriarTela.CriarTelaCadastroProduto: ICriarTela;
+begin
+  result := Self;
+end;
+
+function TTelaCriarTela.CriarTelaMenu: ICriarTela;
+begin
+  result := Self;
+end;
+
+end.

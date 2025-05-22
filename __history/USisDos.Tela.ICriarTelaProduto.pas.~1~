@@ -1,0 +1,17 @@
+unit USisDos.Tela.ICriarTelaProduto;
+
+interface
+
+uses
+  USisDos.Tela.ICadastroProduto;
+
+type
+  ICriarTelaProduto = interface ['{48D2CFD4-449D-4C08-A046-133245BF4388}']
+    function  CriarTelaCadastroProduto : ICriarTelaProduto;
+    function  MensagemDesejaContinuar  : ICriarTelaProduto;
+  End;
+
+
+implementation
+
+end.

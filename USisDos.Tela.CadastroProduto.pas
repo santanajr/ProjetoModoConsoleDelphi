@@ -5,23 +5,28 @@ interface
 uses
   System.SysUtils,
   USisDos.Model.Produto,
-  USisDos.Tela.ICadastroProduto;
+  USisDos.Tela.ICadastroProduto,
+  USisDos.Tela.ICriarTelaProduto;
 
 Type
-  TTelaCadastroProduto = class(TInterfacedObject, ICadastroProduto)
+  TTelaCadastroProduto = class(TInterfacedObject, ICadastroProduto, ICriarTelaProduto)
     private
       FProduto : TProduto;
       FOpcaoEscolhida : string;
     public
       constructor Create;
       destructor destroy;  override;
-      function  MontarTelaCadastroProduto : ICadastroProduto;
+
+      function  CriarTelaCadastroProduto : ICriarTelaProduto;
+      function  MensagemDesejaContinuar  : ICriarTelaProduto;
+
+      //function  MontarTelaCadastroProduto : ICadastroProduto;
       function  GetOpcaoEscolhida : string;
 
       procedure SetProduto(ACodigo, ADescricao : string; AValor: Double);
       function  GetProduto : TProduto;
 
-      class function New : ICadastroProduto;
+      class function New : ICriarTelaProduto;
   end;
 
 implementation
@@ -32,6 +37,11 @@ constructor TTelaCadastroProduto.Create;
 begin
   FProduto := TProduto.Create;
   SetProduto(EmptyStr, EmptyStr, 0);
+end;
+
+function TTelaCadastroProduto.CriarTelaCadastroProduto: ICriarTelaProduto;
+begin
+  result := CriarTelaCadastroProduto;
 end;
 
 destructor TTelaCadastroProduto.destroy;
@@ -49,7 +59,12 @@ begin
   result := FProduto;
 end;
 
-function TTelaCadastroProduto.MontarTelaCadastroProduto : ICadastroProduto;
+function TTelaCadastroProduto.MensagemDesejaContinuar: ICriarTelaProduto;
+begin
+  result := TTelaCadastroProduto.New.MensagemDesejaContinuar;
+end;
+
+{function TTelaCadastroProduto.MontarTelaCadastroProduto : ICadastroProduto;
 var
   LCodigo, LDescricao : string;
   LPreco : double;
@@ -65,9 +80,9 @@ begin
   ReadLn(FOpcaoEscolhida);
 
   Result := Self;
-end;
+end;}
 
-class function TTelaCadastroProduto.New: ICadastroProduto;
+class function TTelaCadastroProduto.New: ICriarTelaProduto;
 begin
   result := TTelaCadastroProduto.Create;
 end;

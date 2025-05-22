@@ -1,0 +1,93 @@
+unit USisDos.Tela.CriarTela;
+
+interface
+
+uses
+  USisDos.Tela.ICriarTela, USisDos.Model.Produto;
+
+type
+  TTelaCriarTela = class(TInterfacedObject, ICriarTela)
+  private
+    FProduto : TProduto;
+    FOpcaoEscolhida : string;
+
+    procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
+  public
+    constructor Create;
+    destructor  Destroy;
+
+
+
+    function  CriarTelaCadastroProduto : ICriarTela;
+    function  CriarTelaCadastroEstoque : ICriarTela;
+    function  CriarTelaMenu : ICriarTela;
+
+    function  MensagemDesejaContinuar : ICriarTela;
+  end;
+
+
+implementation
+
+{ TTelaCriarTela }
+
+constructor TTelaCriarTela.Create;
+begin
+  FProduto := TProduto.Create;
+end;
+
+function TTelaCriarTela.CriarTelaCadastroEstoque: ICriarTela;
+var
+  LCodigo, LDescricao : string;
+  LPreco : double;
+
+  procedure MontagemTela;
+  begin
+    Writeln('Digite o codigo do produto');
+    ReadLn(LCodigo);
+    Writeln('Digite a descrição do produto');
+    ReadLn(LDescricao);
+    Writeln('Digite o preço do produto');
+    ReadLn(LPreco);
+  end;
+
+begin
+  result := Self;
+
+  MontagemTela;
+
+  SetProduto(LCodigo, LDescricao, LPreco);
+
+  MensagemDesejaContinuar;
+end;
+
+function TTelaCriarTela.CriarTelaCadastroProduto: ICriarTela;
+begin
+  result := Self;
+end;
+
+function TTelaCriarTela.CriarTelaMenu: ICriarTela;
+begin
+  result := Self;
+end;
+
+destructor TTelaCriarTela.Destroy;
+begin
+
+end;
+
+function TTelaCriarTela.MensagemDesejaContinuar: ICriarTela;
+begin
+  Writeln('Deseja continuar ? (S/N)');
+  ReadLn(FOpcaoEscolhida);
+
+  result := Self;
+end;
+
+procedure TTelaCriarTela.SetProduto(ACodigo, ADescricao : string; APreco : Double);
+begin
+  FProduto.FCodigo := ACodigo;
+  FProduto.FDescricao := ADescricao;
+  FProduto.FPreco := APreco;
+end;
+
+end.
