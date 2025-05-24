@@ -1,0 +1,14 @@
+unit USisDos.Tela.ICadastroProduto;
+
+interface
+
+type
+  ICadastroProduto = interface['{FDD9AB4B-662C-4F33-82CE-CC534EC379B7}']
+    function  GetOpcaoEscolhida         : string;
+    procedure SetProduto(ACodigo, ADescricao : string; AValor: Double);
+  End;
+
+
+implementation
+
+end.

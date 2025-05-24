@@ -1,0 +1,89 @@
+unit USisDos.Tela.CadastroProduto;
+
+interface
+
+uses
+  System.SysUtils,
+  System.Generics.Collections,
+  USisDos.Model.Produto,
+  USisDos.Tela.ICadastroProduto,
+  USisDos.Tela.ICriarTelaProduto;
+
+Type
+  TTelaCadastroProduto = class(TInterfacedObject, ICadastroProduto, ICriarTelaProduto)
+    private
+      FProduto        : TProduto;
+      FOpcaoEscolhida : string;
+      FListaProduto   : TList<TProduto>;
+    public
+      constructor Create;
+      destructor destroy;  override;
+
+      function  CriarTelaCadastroProduto : ICriarTelaProduto;
+      function  MensagemDesejaContinuar  : ICriarTelaProduto;
+
+
+      function  GetOpcaoEscolhida : string;
+
+      procedure SetProduto(ACodigo, ADescricao : string; AValor: Double);
+      function  GetProduto : TProduto;
+      function  GetListaProduto : TList<TProduto>;
+
+      class function New : ICriarTelaProduto;
+  end;
+
+implementation
+
+{ TTelaCadastroProduto }
+
+constructor TTelaCadastroProduto.Create;
+begin
+  FProduto := TProduto.Create;
+  FListaProduto := TList<TProduto>.Create();
+  SetProduto(EmptyStr, EmptyStr, 0);
+end;
+
+function TTelaCadastroProduto.CriarTelaCadastroProduto: ICriarTelaProduto;
+begin
+  result := CriarTelaCadastroProduto;
+end;
+
+destructor TTelaCadastroProduto.destroy;
+begin
+  FProduto.Destroy;
+  FListaProduto.Destroy;
+end;
+
+function TTelaCadastroProduto.GetListaProduto: TList<TProduto>;
+begin
+  result := FListaProduto;
+end;
+
+function TTelaCadastroProduto.GetOpcaoEscolhida: string;
+begin
+  result := FOpcaoEscolhida.ToUpper();
+end;
+
+function TTelaCadastroProduto.GetProduto: TProduto;
+begin
+  result := FProduto;
+end;
+
+function TTelaCadastroProduto.MensagemDesejaContinuar: ICriarTelaProduto;
+begin
+  result := TTelaCadastroProduto.New.MensagemDesejaContinuar;
+end;
+
+class function TTelaCadastroProduto.New: ICriarTelaProduto;
+begin
+  result := TTelaCadastroProduto.Create;
+end;
+
+procedure TTelaCadastroProduto.SetProduto(ACodigo, ADescricao: string; AValor: Double);
+begin
+  FProduto.FCodigo    := ACodigo;
+  FProduto.FDescricao := ADescricao;
+  FProduto.FPreco     := AValor;
+end;
+
+end.

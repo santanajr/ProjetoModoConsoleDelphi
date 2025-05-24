@@ -1,15 +1,43 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<test-results name="C:\Delphi\ProjetoConsole\Win32\Debug\PtesteConsole.exe" total="3" errors="0" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2025-05-22" time="0.004">
+<test-results name="C:\Delphi\ProjetoConsole\Win32\Debug\PtesteConsole.exe" total="10" errors="0" failures="0" ignored="3" inconclusive="0" not-run="3" skipped="0" invalid="0" date="2025-05-23" time="53.565">
   <culture-info current-culture="en" current-uiculture="en" />
-  <test-suite type="Assembly" name="PtesteConsole.exe" executed="true" result="Success" success="True" time="0.004" asserts="0">
+  <test-suite type="Assembly" name="PtesteConsole.exe" executed="true" result="Success" success="True" time="53.565" asserts="0">
     <results>
-        <test-suite type="Namespace" name="USisDos" executed="true" result="Success" success="True" time="0.002" asserts="0" >
+        <test-suite type="Namespace" name="USisDos" executed="true" result="Success" success="True" time="53.564" asserts="0" >
           <results>
-              <test-suite type="Fixture" name="TestCadastroProduto" executed="True" result="Success" success="True" time="0.002" >
+              <test-suite type="Fixture" name="TestCadastroProduto" executed="True" result="Success" success="True" time="53.564" >
                 <results>
-                  <test-case name="GetProduto" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                  <test-case name="SetProduto.Teste Cadastro Produto - 1" executed="True" result="Success" success="True" time="0.000" asserts="0" />
-                  <test-case name="SetProduto.Teste Cadastro Produto - 2" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="GetProdutoVazio.Teste Cadastro Produto - GetProdutoVazio - 1" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="GetProdutoVazio.Teste Cadastro Produto - GetProdutoVazio - 2" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="GetProdutoPreenchido.Teste Cadastro Produto - GetProdutoPreenchido - 1" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="GetProdutoPreenchido.Teste Cadastro Produto - GetProdutoPreenchido - 2" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="SetProduto.Teste Cadastro Produto - SetProduto - 1" executed="True" result="Success" success="True" time="0.016" asserts="0" />
+                  <test-case name="SetProduto.Teste Cadastro Produto - SetProduto - 2" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="CriarTelaCadastroProduto" executed="False" result="Ignored"  time="0.000" asserts="0" >
+                    <reason>
+                      <message>
+                        <![CDATA[ Tela de cadastro em modo prompt - não precisa ]]>
+                      </message>
+                    </reason>
+                  </test-case>
+                  <test-case name="MensagemDesejaContinuar" executed="False" result="Ignored"  time="0.000" asserts="0" >
+                    <reason>
+                      <message>
+                        <![CDATA[ Tela de cadastro em modo prompt - não precisa ]]>
+                      </message>
+                    </reason>
+                  </test-case>
+                  <test-case name="SetOpcaoEscolhida.Teste Cadastro Produto - SetOpcaoEscolhida = S" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="SetOpcaoEscolhida.Teste Cadastro Produto - SetOpcaoEscolhida = N" executed="True" result="Success" success="True" time="0.000" asserts="0" />
+                  <test-case name="GetOpcaoEscolhida" executed="False" result="Ignored"  time="0.000" asserts="0" >
+                    <reason>
+                      <message>
+                        <![CDATA[ Falta Implementar ]]>
+                      </message>
+                    </reason>
+                  </test-case>
+                  <test-case name="GetListaProduto.Teste Cadastro Produto - GetListaProduto - 1" executed="True" result="Success" success="True" time="37.682" asserts="0" />
+                  <test-case name="GetListaProduto.Teste Cadastro Produto - GetListaProduto - 2" executed="True" result="Success" success="True" time="15.873" asserts="0" />
                 </results>
               </test-suite>
           </results>

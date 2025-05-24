@@ -4,6 +4,7 @@ interface
 
 uses
   System.SysUtils,
+  System.Generics.Collections,
   USisDos.Model.Produto,
   USisDos.Tela.ICadastroProduto,
   USisDos.Tela.ICriarTelaProduto;
@@ -11,20 +12,21 @@ uses
 Type
   TTelaCadastroProduto = class(TInterfacedObject, ICadastroProduto, ICriarTelaProduto)
     private
-      FProduto : TProduto;
+      FProduto        : TProduto;
       FOpcaoEscolhida : string;
+      FListaProduto   : TList<TProduto>;
     public
       constructor Create;
       destructor destroy;  override;
 
-      function  CriarTelaCadastroProduto : ICriarTelaProduto;
-      function  MensagemDesejaContinuar  : ICriarTelaProduto;
+      function CriarTelaCadastroProduto : ICriarTelaProduto;
+      function MensagemDesejaContinuar  : ICriarTelaProduto;
+      function GetOpcaoEscolhida        : string;
 
-      //function  MontarTelaCadastroProduto : ICadastroProduto;
-      function  GetOpcaoEscolhida : string;
 
       procedure SetProduto(ACodigo, ADescricao : string; AValor: Double);
       function  GetProduto : TProduto;
+      function  GetListaProduto : TList<TProduto>;
 
       class function New : ICriarTelaProduto;
   end;
@@ -36,6 +38,7 @@ implementation
 constructor TTelaCadastroProduto.Create;
 begin
   FProduto := TProduto.Create;
+  FListaProduto := TList<TProduto>.Create();
   SetProduto(EmptyStr, EmptyStr, 0);
 end;
 
@@ -47,6 +50,12 @@ end;
 destructor TTelaCadastroProduto.destroy;
 begin
   FProduto.Destroy;
+  FListaProduto.Destroy;
+end;
+
+function TTelaCadastroProduto.GetListaProduto: TList<TProduto>;
+begin
+  result := FListaProduto;
 end;
 
 function TTelaCadastroProduto.GetOpcaoEscolhida: string;
@@ -63,24 +72,6 @@ function TTelaCadastroProduto.MensagemDesejaContinuar: ICriarTelaProduto;
 begin
   result := TTelaCadastroProduto.New.MensagemDesejaContinuar;
 end;
-
-{function TTelaCadastroProduto.MontarTelaCadastroProduto : ICadastroProduto;
-var
-  LCodigo, LDescricao : string;
-  LPreco : double;
-begin
-  Writeln('Digite o codigo do produto');
-  ReadLn(LCodigo);
-  Writeln('Digite a descrição do produto');
-  ReadLn(LDescricao);
-  Writeln('Digite o preço do produto');
-  ReadLn(LPreco);
-  SetProduto(LCodigo, LDescricao, LPreco);
-  Writeln('Deseja continuar ? (S/N)');
-  ReadLn(FOpcaoEscolhida);
-
-  Result := Self;
-end;}
 
 class function TTelaCadastroProduto.New: ICriarTelaProduto;
 begin

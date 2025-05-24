@@ -1,0 +1,12 @@
+unit USisDos.Tela.IFuncoesTelaProduto;
+
+interface
+
+type
+  IFuncoesTelaProduto = ['{4061AFBB-C724-4DA6-85B1-CE86D093BF83}']
+
+  end;
+
+implementation
+
+end.

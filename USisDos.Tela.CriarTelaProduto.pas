@@ -3,24 +3,31 @@ unit USisDos.Tela.CriarTelaProduto;
 interface
 
 uses
-  USisDos.Tela.ICriarTelaProduto, USisDos.Model.Produto;
+  System.Generics.Collections,
+  USisDos.Tela.ICriarTelaProduto,
+  USisDos.Model.Produto,
+  USisDos.Tela.IFuncoesTelaProduto;
 
 type
   TTelaCriarTelaProduto = class(TInterfacedObject, ICriarTelaProduto)
   private
-    FProduto : TProduto;
+    FProduto        : TProduto;
     FOpcaoEscolhida : string;
+    FListaProduto   : TList<TProduto>;
 
+    procedure AdicionarLista;
     procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
   public
     constructor Create;
     destructor  Destroy;
 
-    function  GetProduto               : TProduto;
-    function  GetOpcaoEscolhida       : string;
-
     function  CriarTelaCadastroProduto : ICriarTelaProduto;
     function  MensagemDesejaContinuar  : ICriarTelaProduto;
+    procedure SetOpcaoEscolhida(AOpcaoEscolida : string);
+    function  GetOpcaoEscolhida        : string;
+
+    function  GetProduto               : TProduto;
+    function  GetListaProduto          : TList<TProduto>;
 
     class function new : ICriarTelaProduto;
   end;
@@ -30,9 +37,14 @@ implementation
 
 { TTelaCriarTela }
 
+procedure TTelaCriarTelaProduto.AdicionarLista;
+begin
+  FListaProduto.Add(FProduto);
+end;
+
 constructor TTelaCriarTelaProduto.Create;
 begin
-  FProduto := TProduto.Create;
+  FListaProduto := TList<TProduto>.Create;
 end;
 
 function TTelaCriarTelaProduto.CriarTelaCadastroProduto: ICriarTelaProduto;
@@ -66,6 +78,11 @@ begin
 
 end;
 
+function TTelaCriarTelaProduto.GetListaProduto: TList<TProduto>;
+begin
+  result := FListaProduto;
+end;
+
 function TTelaCriarTelaProduto.GetOpcaoEscolhida: string;
 begin
   result := FOpcaoEscolhida;
@@ -77,9 +94,13 @@ begin
 end;
 
 function TTelaCriarTelaProduto.MensagemDesejaContinuar: ICriarTelaProduto;
+var
+  LOpcaoEscolhida : string;
 begin
   Writeln('Deseja continuar ? (S/N)');
-  ReadLn(FOpcaoEscolhida);
+  ReadLn(LOpcaoEscolhida);
+
+  SetOpcaoEscolhida(LOpcaoEscolhida);
 
   result := Self;
 end;
@@ -89,11 +110,19 @@ begin
   result := TTelaCriarTelaProduto.Create;
 end;
 
+procedure TTelaCriarTelaProduto.SetOpcaoEscolhida(AOpcaoEscolida: string);
+begin
+  FOpcaoEscolhida := AOpcaoEscolida;
+end;
+
 procedure TTelaCriarTelaProduto.SetProduto(ACodigo, ADescricao : string; APreco : Double);
 begin
+  FProduto := TProduto.Create;
   FProduto.FCodigo := ACodigo;
   FProduto.FDescricao := ADescricao;
   FProduto.FPreco := APreco;
+
+  AdicionarLista;
 end;
 
 end.

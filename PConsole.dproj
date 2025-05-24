@@ -180,7 +180,6 @@
         </DelphiCompile>
         <DCCReference Include="USisDos.Tela.Menu.pas"/>
         <DCCReference Include="USisDos.Tela.IMenu.pas"/>
-        <DCCReference Include="USisDos.Tela.CadastroProduto.pas"/>
         <DCCReference Include="USisDos.Model.Produto.pas"/>
         <DCCReference Include="USisDos.Tela.ICadastroProduto.pas"/>
         <DCCReference Include="USisDos.Model.Estoque.pas"/>
@@ -188,6 +187,7 @@
         <DCCReference Include="USisDos.Tela.CadastroEstoque.pas"/>
         <DCCReference Include="USisDos.Tela.ICriarTelaProduto.pas"/>
         <DCCReference Include="USisDos.Tela.CriarTelaProduto.pas"/>
+        <DCCReference Include="USisDos.Tela.IFuncoesTelaProduto.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

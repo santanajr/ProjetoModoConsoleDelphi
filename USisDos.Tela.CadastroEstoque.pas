@@ -32,7 +32,7 @@ type
     function SetValorEstoque(AEstoque : Integer) : ICadastroEstoque;
     function GuardarEstoque : ICadastroEstoque;
 
-    function GetOpcaoEscolhida : string;
+    function  GetOpcaoEscolhida : string;
     procedure SetProdutoEncontradoNegativo;
 
     class function New : ICadastroEstoque;
@@ -102,7 +102,7 @@ function TCadastroEstoque.PesquisarProduto(ATipoLista : TListaPesquisa = TListPr
     Produto: TProduto;
   begin
     for Produto in FListaProduto do
-      if Produto.FCodigo = ACodigo then
+      if Produto.FCodigo.Trim() = ACodigo.trim() then
         Exit(Produto);
     Result := nil;
   end;
@@ -113,7 +113,6 @@ function TCadastroEstoque.PesquisarProduto(ATipoLista : TListaPesquisa = TListPr
   begin
     FProdutoEncontrado := False;
     LProduto := EncontrarProdutoPorCodigo(FCodigoDigitado);
-
     if Assigned(LProduto) then
     begin
       FEstoque.FProduto := LProduto;

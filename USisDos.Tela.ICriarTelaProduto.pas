@@ -3,15 +3,24 @@ unit USisDos.Tela.ICriarTelaProduto;
 interface
 
 uses
-  USisDos.Tela.ICadastroProduto, USisDos.Model.Produto;
+  USisDos.Tela.ICadastroProduto,
+  USisDos.Model.Produto,
+  System.Generics.Collections;
 
 type
   ICriarTelaProduto = interface ['{48D2CFD4-449D-4C08-A046-133245BF4388}']
+    {$REGION 'CRIACAO TELA'}
     function  CriarTelaCadastroProduto : ICriarTelaProduto;
     function  MensagemDesejaContinuar  : ICriarTelaProduto;
-    function  GetProduto               : TProduto;
-
+    procedure SetOpcaoEscolhida(AOpcaoEscolida : string);
     function  GetOpcaoEscolhida        : string;
+    {$ENDREGION}
+
+    {$REGION 'FUNCOES TELA'}
+    function  GetProduto               : TProduto;
+    function  GetListaProduto          : TList<TProduto>;
+    procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
+    {$ENDREGION}
   End;
 
 

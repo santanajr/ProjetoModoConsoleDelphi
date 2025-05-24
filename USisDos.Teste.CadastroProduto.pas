@@ -5,13 +5,14 @@ interface
 uses
   System.SysUtils,
   DUnitX.TestFramework,
-  USisDos.Tela.CadastroProduto;
+  USisDos.Tela.ICriarTelaProduto,
+  USisDos.Tela.CriarTelaProduto;
 
 type
   [TestFixture]
   TestCadastroProduto = class
   private
-    FCadastroProduto : TTelaCadastroProduto;
+    FCadastroProduto : ICriarTelaProduto;
   public
     [Setup]
     procedure Setup;
@@ -20,25 +21,89 @@ type
     // Sample Methods
     // Simple single Test
     [Test]
-    procedure GetProduto;
+    [TestCase('Teste Cadastro Produto - GetProdutoVazio - 1','1,ABC,10')]
+    [TestCase('Teste Cadastro Produto - GetProdutoVazio - 2','2,DEF,20')]
+    procedure GetProdutoVazio(ACodigo, ADesc : string; Apreco: double) ;
 
     [Test]
-    [TestCase('Teste Cadastro Produto - 1','1,ABC,10')]
-    [TestCase('Teste Cadastro Produto - 2','2,DEF,20')]
+    [TestCase('Teste Cadastro Produto - GetProdutoPreenchido - 1','1,ABC,10')]
+    [TestCase('Teste Cadastro Produto - GetProdutoPreenchido - 2','2,DEF,20')]
+    procedure GetProdutoPreenchido(ACodigo, ADesc : string; Apreco: double) ;
+
+
+    [Test]
+    [TestCase('Teste Cadastro Produto - SetProduto - 1','1,ABC,10')]
+    [TestCase('Teste Cadastro Produto - SetProduto - 2','2,DEF,20')]
     procedure SetProduto(ACodigo, ADesc : string; Apreco: double);
+
+    [Test]
+    [Ignore('Tela de cadastro em modo prompt - não precisa')]
+    procedure  CriarTelaCadastroProduto;
+
+    [Test]
+    [Ignore('Tela de cadastro em modo prompt - não precisa')]
+    procedure  MensagemDesejaContinuar;
+
+    [Test]
+    //[Ignore('Falta Implementar')]
+    [TestCase('Teste Cadastro Produto - SetOpcaoEscolhida = S','S')]
+    [TestCase('Teste Cadastro Produto - SetOpcaoEscolhida = N','N')]
+    procedure  SetOpcaoEscolhida(AOpcao : string);
+
+    [Test]
+    [Ignore('Falta Implementar')]
+    procedure  GetOpcaoEscolhida;
+
+    [Test]
+    //[Ignore('Falta Implementar')]
+    [TestCase('Teste Cadastro Produto - GetListaProduto - 1','1,ABC,10')]
+    [TestCase('Teste Cadastro Produto - GetListaProduto - 2','2,DEF,20')]
+    procedure  GetListaProduto(ACodigo, ADesc : string; Apreco: double);
    end;
 
 implementation
 
-procedure TestCadastroProduto.GetProduto;
+procedure TestCadastroProduto.CriarTelaCadastroProduto;
 begin
-  Assert.IsTrue(FCadastroProduto.GetProduto <> nil, 'O Produto não existe');
-  if FCadastroProduto.GetProduto <> nil then
-  begin
-    Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = EmptyStr, 'O codigo do produto não está vazio');
-    Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = EmptyStr, 'A Descricao do produto não está vazia');
-    Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = 0       , 'O valor do produto nao é zero');
-  end;
+
+end;
+
+procedure TestCadastroProduto.GetListaProduto(ACodigo, ADesc : string; Apreco: double);
+begin
+  FCadastroProduto.SetProduto(ACodigo, ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetListaProduto <> nil , 'A lista existe');
+  if FCadastroProduto.GetListaProduto <> nil then
+    Assert.IsTrue(FCadastroProduto.GetListaProduto.Count = 1 , 'Total de produto na lista = 1');
+end;
+
+procedure TestCadastroProduto.GetOpcaoEscolhida;
+begin
+
+end;
+
+
+procedure TestCadastroProduto.GetProdutoPreenchido(ACodigo, ADesc: string; Apreco: double);
+begin
+  FCadastroProduto.SetProduto(ACodigo, ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = Acodigo , 'O codigo do produto não está vazio');
+  Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = ADesc   , 'A Descricao do produto não está vazia');
+  Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = Apreco  , 'O valor do produto nao é zero');
+end;
+
+procedure TestCadastroProduto.GetProdutoVazio(ACodigo, ADesc : string; Apreco: double);
+begin
+  Assert.IsTrue(FCadastroProduto.GetProduto = nil, 'O Produto não existe');
+end;
+
+procedure TestCadastroProduto.MensagemDesejaContinuar;
+begin
+
+end;
+
+procedure TestCadastroProduto.SetOpcaoEscolhida(AOpcao: string);
+begin
+  FCadastroProduto.SetOpcaoEscolhida(AOpcao);
+  Assert.IsTrue(FCadastroProduto.GetOpcaoEscolhida = AOpcao, 'O Valor preenchido = ' + FCadastroProduto.GetOpcaoEscolhida);
 end;
 
 procedure TestCadastroProduto.SetProduto(ACodigo, ADesc: string; Apreco: double);
@@ -51,15 +116,13 @@ end;
 
 procedure TestCadastroProduto.Setup;
 begin
-  FCadastroProduto := TTelaCadastroProduto.Create;
+  FCadastroProduto := TTelaCriarTelaProduto.Create;
 end;
 
 procedure TestCadastroProduto.TearDown;
 begin
-  FCadastroProduto.Free;
 end;
 
 initialization
   TDUnitX.RegisterTestFixture(TestCadastroProduto);
-
 end.

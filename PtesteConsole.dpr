@@ -55,11 +55,11 @@ begin
 
     {$IFNDEF CI}
     //We don't want this happening when running under CI.
-    if TDUnitX.Options.ExitBehavior = TDUnitXExitBehavior.Pause then
-    begin
-      System.Write('Done.. press <Enter> key to quit.');
-      System.Readln;
-    end;
+    //if TDUnitX.Options.ExitBehavior = TDUnitXExitBehavior.Pause then
+    //begin
+    System.Write('Done.. press <Enter> key to quit.');
+    System.Readln;
+    //end;
     {$ENDIF}
   except
     on E: Exception do

@@ -1,0 +1,93 @@
+unit USisDos.Teste.CadastroProduto;
+
+interface
+
+uses
+  System.SysUtils,
+  DUnitX.TestFramework,
+  USisDos.Tela.ICriarTelaProduto,
+  USisDos.Tela.CriarTelaProduto;
+
+type
+  [TestFixture]
+  TestCadastroProduto = class
+  private
+    FCadastroProduto : ICriarTelaProduto;
+  public
+    [Setup]
+    procedure Setup;
+    [TearDown]
+    procedure TearDown;
+    // Sample Methods
+    // Simple single Test
+    [Test]
+    procedure GetProduto;
+
+    [Test]
+    [TestCase('Teste Cadastro Produto - 1','1,ABC,10')]
+    [TestCase('Teste Cadastro Produto - 2','2,DEF,20')]
+    procedure SetProduto(ACodigo, ADesc : string; Apreco: double);
+    [Ignore]
+    procedure  CriarTelaCadastroProduto;
+    [Ignore]
+    procedure  MensagemDesejaContinuar;
+    [Ignore]
+    procedure  GetOpcaoEscolhida;
+    [Ignore]
+    procedure  GetListaProduto;
+   end;
+
+implementation
+
+procedure TestCadastroProduto.CriarTelaCadastroProduto;
+begin
+
+end;
+
+procedure TestCadastroProduto.GetListaProduto;
+begin
+
+end;
+
+procedure TestCadastroProduto.GetOpcaoEscolhida;
+begin
+
+end;
+
+procedure TestCadastroProduto.GetProduto;
+begin
+  Assert.IsTrue(FCadastroProduto.GetProduto <> nil, 'O Produto não existe');
+  if FCadastroProduto.GetProduto <> nil then
+  begin
+    Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = EmptyStr, 'O codigo do produto não está vazio');
+    Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = EmptyStr, 'A Descricao do produto não está vazia');
+    Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = 0       , 'O valor do produto nao é zero');
+  end;
+end;
+
+procedure TestCadastroProduto.MensagemDesejaContinuar;
+begin
+
+end;
+
+procedure TestCadastroProduto.SetProduto(ACodigo, ADesc: string; Apreco: double);
+begin
+  FCadastroProduto.SetProduto(ACodigo,ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = ACodigo , 'Os código são diferentes');
+  Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = ADesc   , 'A descrição é diferente');
+  Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = Apreco  , 'O Valor do produto é diferente');
+end;
+
+procedure TestCadastroProduto.Setup;
+begin
+  FCadastroProduto := TTelaCriarTelaProduto.Create;
+end;
+
+procedure TestCadastroProduto.TearDown;
+begin
+end;
+
+initialization
+  TDUnitX.RegisterTestFixture(TestCadastroProduto);
+
+end.
