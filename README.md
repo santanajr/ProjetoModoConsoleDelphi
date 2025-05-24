@@ -86,6 +86,11 @@ Em nossos fontes :
 
 ![image](https://github.com/user-attachments/assets/59c2c259-8378-4a39-887c-5761dc42d831)
 
+Teste Unitário - Cadastro Produto - As 3 funções Ignoradas são referente a tela que é modo console.
+
+![image](https://github.com/user-attachments/assets/6581189a-09e1-49f0-bfa6-f2b5b0356a45)
+
+
   
 
   
