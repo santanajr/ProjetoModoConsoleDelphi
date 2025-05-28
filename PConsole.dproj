@@ -188,6 +188,7 @@
         <DCCReference Include="USisDos.Tela.ICriarTelaProduto.pas"/>
         <DCCReference Include="USisDos.Tela.CriarTelaProduto.pas"/>
         <DCCReference Include="USisDos.Tela.IFuncoesTelaProduto.pas"/>
+        <DCCReference Include="USisDos.Tela.FuncoesCadastroProduto.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

@@ -5,7 +5,9 @@ interface
 uses
   USisDos.Tela.ICadastroProduto,
   USisDos.Model.Produto,
-  System.Generics.Collections;
+  System.Generics.Collections,
+  USisDos.Tela.IFuncoesTelaProduto
+  ;
 
 type
   ICriarTelaProduto = interface ['{48D2CFD4-449D-4C08-A046-133245BF4388}']
@@ -15,12 +17,7 @@ type
     procedure SetOpcaoEscolhida(AOpcaoEscolida : string);
     function  GetOpcaoEscolhida        : string;
     {$ENDREGION}
-
-    {$REGION 'FUNCOES TELA'}
-    function  GetProduto               : TProduto;
-    function  GetListaProduto          : TList<TProduto>;
-    procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
-    {$ENDREGION}
+    function  GetFuncaoCadProduto : IFuncoesTelaProduto;
   End;
 
 

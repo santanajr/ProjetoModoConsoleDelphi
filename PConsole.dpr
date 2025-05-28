@@ -16,11 +16,13 @@ uses
   USisDos.Tela.CadastroEstoque in 'USisDos.Tela.CadastroEstoque.pas',
   USisDos.Tela.ICriarTelaProduto in 'USisDos.Tela.ICriarTelaProduto.pas',
   USisDos.Tela.CriarTelaProduto in 'USisDos.Tela.CriarTelaProduto.pas',
-  USisDos.Tela.IFuncoesTelaProduto in 'USisDos.Tela.IFuncoesTelaProduto.pas';
+  USisDos.Tela.IFuncoesTelaProduto in 'USisDos.Tela.IFuncoesTelaProduto.pas',
+  USisDos.Tela.FuncoesCadastroProduto in 'USisDos.Tela.FuncoesCadastroProduto.pas';
 
 var
-  LOpcaoEscolhida   : string;
-  LTelaProduto      : ICriarTelaProduto;
+  LOpcaoEscolhida    : string;
+  LTelaProduto       : ICriarTelaProduto;
+
   LTelaEstoque      : ICadastroEstoque;
 
   LListaEstoque     : TList<TEstoque>;
@@ -29,8 +31,8 @@ var
 
   procedure CriarTelas;
   begin
-    LTelaProduto  := TTelaCriarTelaProduto.New;
-    LTelaEstoque  := TCadastroEstoque.New;
+    LTelaProduto := TTelaCriarTelaProduto.New;
+    LTelaEstoque := TCadastroEstoque.New;
   end;
 
   procedure CriarListaDados;
@@ -68,7 +70,7 @@ var
   function TelaCadastroEstoque : string;
   begin
     LTelaEstoque.MontarTelaCadastroEstoque;
-    LTelaEstoque.SetListaProduto(LTelaProduto.GetListaProduto)
+    LTelaEstoque.SetListaProduto(LTelaProduto.GetFuncaoCadProduto.GetListaProduto)
                 .SetListaEstoque(LListaEstoque)
                 .PesquisarProduto(TListProd)
                 .GuardarEstoque.MensagemAtualizacaoEstoque.SetProdutoEncontradoNegativo;

@@ -6,28 +6,26 @@ uses
   System.Generics.Collections,
   USisDos.Tela.ICriarTelaProduto,
   USisDos.Model.Produto,
-  USisDos.Tela.IFuncoesTelaProduto;
+  USisDos.Tela.IFuncoesTelaProduto,
+  USisDos.Tela.FuncoesCadastroProduto;
 
 type
   TTelaCriarTelaProduto = class(TInterfacedObject, ICriarTelaProduto)
   private
-    FProduto        : TProduto;
-    FOpcaoEscolhida : string;
-    FListaProduto   : TList<TProduto>;
+    FOpcaoEscolhida   : string;
+    FFuncaoCadProduto : IFuncoesTelaProduto;
 
-    procedure AdicionarLista;
-    procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
+    procedure PedirDadosProduto(var ACodigo : string; var ADescricao: string; var APreco: Double);
+    procedure CadastrarProduto(ACodigo, ADescricao : string; APreco : Double);
   public
     constructor Create;
-    destructor  Destroy;
 
     function  CriarTelaCadastroProduto : ICriarTelaProduto;
     function  MensagemDesejaContinuar  : ICriarTelaProduto;
     procedure SetOpcaoEscolhida(AOpcaoEscolida : string);
     function  GetOpcaoEscolhida        : string;
 
-    function  GetProduto               : TProduto;
-    function  GetListaProduto          : TList<TProduto>;
+    function  GetFuncaoCadProduto : IFuncoesTelaProduto;
 
     class function new : ICriarTelaProduto;
   end;
@@ -37,60 +35,31 @@ implementation
 
 { TTelaCriarTela }
 
-procedure TTelaCriarTelaProduto.AdicionarLista;
-begin
-  FListaProduto.Add(FProduto);
-end;
-
 constructor TTelaCriarTelaProduto.Create;
 begin
-  FListaProduto := TList<TProduto>.Create;
+  FFuncaoCadProduto := TFuncoesCadastroProduto.create;
 end;
 
 function TTelaCriarTelaProduto.CriarTelaCadastroProduto: ICriarTelaProduto;
 var
   LCodigo, LDescricao : string;
   LPreco : double;
-
-  procedure MontagemTela;
-  begin
-    Writeln('Digite o codigo do produto');
-    ReadLn(LCodigo);
-    Writeln('Digite a descrição do produto');
-    ReadLn(LDescricao);
-    Writeln('Digite o preço do produto');
-    ReadLn(LPreco);
-  end;
-
 begin
   result := Self;
-
-  MontagemTela;
-
-  SetProduto(LCodigo, LDescricao, LPreco);
-
+  PedirDadosProduto(LCodigo, LDescricao, LPreco);
+  CadastrarProduto(LCodigo, LDescricao, LPreco);
   MensagemDesejaContinuar;
 end;
 
 
-destructor TTelaCriarTelaProduto.Destroy;
+function TTelaCriarTelaProduto.GetFuncaoCadProduto: IFuncoesTelaProduto;
 begin
-
-end;
-
-function TTelaCriarTelaProduto.GetListaProduto: TList<TProduto>;
-begin
-  result := FListaProduto;
+  result := FFuncaoCadProduto;
 end;
 
 function TTelaCriarTelaProduto.GetOpcaoEscolhida: string;
 begin
   result := FOpcaoEscolhida;
-end;
-
-function TTelaCriarTelaProduto.GetProduto: TProduto;
-begin
-  result := FProduto;
 end;
 
 function TTelaCriarTelaProduto.MensagemDesejaContinuar: ICriarTelaProduto;
@@ -99,9 +68,7 @@ var
 begin
   Writeln('Deseja continuar ? (S/N)');
   ReadLn(LOpcaoEscolhida);
-
   SetOpcaoEscolhida(LOpcaoEscolhida);
-
   result := Self;
 end;
 
@@ -110,19 +77,24 @@ begin
   result := TTelaCriarTelaProduto.Create;
 end;
 
+procedure TTelaCriarTelaProduto.PedirDadosProduto(var ACodigo : string; var ADescricao: string; var APreco: Double);
+begin
+  Writeln('Digite o codigo do produto');
+  ReadLn(ACodigo);
+  Writeln('Digite a descrição do produto');
+  ReadLn(ADescricao);
+  Writeln('Digite o preço do produto');
+  ReadLn(APreco);
+end;
+
 procedure TTelaCriarTelaProduto.SetOpcaoEscolhida(AOpcaoEscolida: string);
 begin
   FOpcaoEscolhida := AOpcaoEscolida;
 end;
 
-procedure TTelaCriarTelaProduto.SetProduto(ACodigo, ADescricao : string; APreco : Double);
+procedure TTelaCriarTelaProduto.CadastrarProduto(ACodigo, ADescricao : string; APreco : Double);
 begin
-  FProduto := TProduto.Create;
-  FProduto.FCodigo := ACodigo;
-  FProduto.FDescricao := ADescricao;
-  FProduto.FPreco := APreco;
-
-  AdicionarLista;
+  FFuncaoCadProduto.CadastrarProduto(ACodigo, ADescricao, APreco);
 end;
 
 end.

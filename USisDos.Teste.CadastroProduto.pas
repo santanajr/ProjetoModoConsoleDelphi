@@ -70,10 +70,10 @@ end;
 
 procedure TestCadastroProduto.GetListaProduto(ACodigo, ADesc : string; Apreco: double);
 begin
-  FCadastroProduto.SetProduto(ACodigo, ADesc, Apreco);
-  Assert.IsTrue(FCadastroProduto.GetListaProduto <> nil , 'A lista existe');
-  if FCadastroProduto.GetListaProduto <> nil then
-    Assert.IsTrue(FCadastroProduto.GetListaProduto.Count = 1 , 'Total de produto na lista = 1');
+  FCadastroProduto.GetFuncaoCadProduto.CadastrarProduto(ACodigo, ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetListaProduto <> nil , 'A lista existe');
+  if FCadastroProduto.GetFuncaoCadProduto.GetListaProduto <> nil then
+    Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetListaProduto.Count = 1 , 'Total de produto na lista = 1');
 end;
 
 procedure TestCadastroProduto.GetOpcaoEscolhida;
@@ -84,15 +84,15 @@ end;
 
 procedure TestCadastroProduto.GetProdutoPreenchido(ACodigo, ADesc: string; Apreco: double);
 begin
-  FCadastroProduto.SetProduto(ACodigo, ADesc, Apreco);
-  Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = Acodigo , 'O codigo do produto não está vazio');
-  Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = ADesc   , 'A Descricao do produto não está vazia');
-  Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = Apreco  , 'O valor do produto nao é zero');
+  FCadastroProduto.GetFuncaoCadProduto.CadastrarProduto(ACodigo, ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FCodigo    = Acodigo , 'O codigo do produto não está vazio');
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FDescricao = ADesc   , 'A Descricao do produto não está vazia');
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FPreco     = Apreco  , 'O valor do produto nao é zero');
 end;
 
 procedure TestCadastroProduto.GetProdutoVazio(ACodigo, ADesc : string; Apreco: double);
 begin
-  Assert.IsTrue(FCadastroProduto.GetProduto = nil, 'O Produto não existe');
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto = nil, 'O Produto não existe');
 end;
 
 procedure TestCadastroProduto.MensagemDesejaContinuar;
@@ -108,10 +108,10 @@ end;
 
 procedure TestCadastroProduto.SetProduto(ACodigo, ADesc: string; Apreco: double);
 begin
-  FCadastroProduto.SetProduto(ACodigo,ADesc, Apreco);
-  Assert.IsTrue(FCadastroProduto.GetProduto.FCodigo    = ACodigo , 'Os código são diferentes');
-  Assert.IsTrue(FCadastroProduto.GetProduto.FDescricao = ADesc   , 'A descrição é diferente');
-  Assert.IsTrue(FCadastroProduto.GetProduto.FPreco     = Apreco  , 'O Valor do produto é diferente');
+  FCadastroProduto.GetFuncaoCadProduto.CadastrarProduto(ACodigo,ADesc, Apreco);
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FCodigo    = ACodigo , 'Os código são diferentes');
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FDescricao = ADesc   , 'A descrição é diferente');
+  Assert.IsTrue(FCadastroProduto.GetFuncaoCadProduto.GetProduto.FPreco     = Apreco  , 'O Valor do produto é diferente');
 end;
 
 procedure TestCadastroProduto.Setup;

@@ -1,0 +1,80 @@
+unit USisDos.Tela.FuncoesCadastroProduto;
+
+interface
+
+uses
+  USisDos.Tela.IFuncoesTelaProduto,
+  USisDos.Model.Produto,
+  System.Generics.Collections;
+
+type
+
+TFuncoesCadastroProduto = class(TInterfacedObject, IFuncoesTelaProduto)
+  private
+    FProduto          : TProduto;
+    FListaProduto : TList<TProduto>;
+  public
+    constructor create;
+    destructor destroy;
+
+    procedure AdicionarLista;
+    procedure SetProduto(ACodigo, ADescricao : string; APreco : Double);
+    function  GetProduto : TProduto;
+    function  GetListaProduto : TList<TProduto>;
+
+    function  GetFuncaoCadProduto : IFuncoesTelaProduto;
+
+    class function new : IFuncoesTelaProduto;
+end;
+
+implementation
+
+{ TFuncoesCadastroProduto }
+
+procedure TFuncoesCadastroProduto.AdicionarLista;
+begin
+  FListaProduto.Add(FProduto);
+end;
+
+constructor TFuncoesCadastroProduto.create;
+begin
+  FListaProduto := TList<TProduto>.Create;
+end;
+
+destructor TFuncoesCadastroProduto.destroy;
+begin
+  FProduto.Free;
+  FListaProduto.Free;
+  FProduto := nil;
+  FListaProduto := nil;
+end;
+
+function TFuncoesCadastroProduto.GetFuncaoCadProduto: IFuncoesTelaProduto;
+begin
+  result := Self;
+end;
+
+function TFuncoesCadastroProduto.GetListaProduto: TList<TProduto>;
+begin
+  result := FListaProduto;
+end;
+
+function TFuncoesCadastroProduto.GetProduto: TProduto;
+begin
+  result := nil;
+end;
+
+class function TFuncoesCadastroProduto.new: IFuncoesTelaProduto;
+begin
+  result := TFuncoesCadastroProduto.Create;
+end;
+
+procedure TFuncoesCadastroProduto.SetProduto(ACodigo, ADescricao: string; APreco: Double);
+begin
+  FProduto := TProduto.Create;
+  FProduto.FCodigo := ACodigo;
+  FProduto.FDescricao := ADescricao;
+  FProduto.FPreco := APreco;
+end;
+
+end.
