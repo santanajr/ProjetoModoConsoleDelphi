@@ -40,7 +40,7 @@ begin
   FFuncaoCadProduto := TFuncoesCadastroProduto.create;
 end;
 
-function TTelaCriarTelaProduto.CriarTelaCadastroProduto: ICriarTelaProduto;
+function TTelaCriarTelaProduto.CriarTelaCadastroProduto : ICriarTelaProduto;
 var
   LCodigo, LDescricao : string;
   LPreco : double;
