@@ -90,6 +90,14 @@ Teste Unitário - Cadastro Produto - As 3 funções Ignoradas são referente a t
 
 ![image](https://github.com/user-attachments/assets/6581189a-09e1-49f0-bfa6-f2b5b0356a45)
 
+Nova implementação - classe que guarda os dados do produto
+![image](https://github.com/user-attachments/assets/5644dcda-76e3-402e-898d-547a7b271f3f)
+
+![image](https://github.com/user-attachments/assets/90139404-e8d6-49b5-bbde-ff8aa3fd901f)
+
+
+
+
 
   
 
